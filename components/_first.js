@@ -1,20 +1,20 @@
 import Autocomplete from 'react-native-autocomplete-input';
 import React, {Component} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View, ActivityIndicator, FlatList} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View, ActivityIndicator, TextInput} from 'react-native';
 import {insertNewRecipe, insertNewIngredient, findIngredient} from "../databases/allSchemas";
 import  realm from "../databases/allSchemas";
 
+const Realm = require('realm');
 
 const foodList = "https://api.myjson.com/bins/1bnz0w"
 export default class First extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            data: null,
-            query: '',
-            ingredients:[]
-        }
+        this.state = { realm: null ,
+            tanDogs:null};
+    }
+
 
         // insertNewIngredient({
         //     "id":1,
@@ -25,63 +25,62 @@ export default class First extends Component {
         // })
 
 
-    }
 
-    componentDidMount() {
-        fetch('https://api.myjson.com/bins/1bnz0w"')
-            .then(response => response.json())
-            .then(data => this.setState({data: data}));
-    }
+    componentDidMount(){
+        Realm.open({
+            schema: [{name: 'Dog', properties: {name: 'string'}}]
+        }).then(realm => {
+            let info = realm
+                ? 'Number of dogs in this Realm: ' + realm.objects('Dog').length+
+                : 'Loading...';
+            console.log(info);
+            this.setState({
+                dogInfo: info
+            })
 
-    findFood(query) {
-        if (query === '') {
-            return [];
-        }
 
-        const {data} = this.state;
-        const regex = new RegExp(`${query.trim()}`, 'i');
-        return data.filter(food => food.name.search(regex) >= 0);
+            this.setState({realm});
+        });
+
+        //
+        // let tanDogs={};
+        // if(this.state.realm){
+        //   let dogs=  this.state.realm.objects('Dog');
+        //    this.setState({
+        //        tanDogs : dogs.filtered('color = "brown" ')
+        //    })
+        // } else{
+        //     this.setState({
+        //         tanDogs : "nie ma"
+        //     })
+        // }
+
+
+
     }
 
     render() {
 
-        const {query} = this.state;
-        const films = this.findFood(query);
-        const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
-        let banany=findIngredient("Banany 1kg");
-
-        return this.state.data != null ?
-            <View style={styles.container}>
-
-                <Autocomplete
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    containerStyle={styles.autocompleteContainer}
-                    data={films.length === 1 && comp(query, films[0].name) ? [] : films}
-                    defaultValue={query}
-                    onChangeText={text => this.setState({query: text})}
-                    placeholder="Enter food name"
-                    renderItem={({name, category}) => (
-                        <TouchableOpacity onPress={() => this.setState({query: name})}>
-                            <Text style={styles.itemText}>
-                                {name} ({category})
-                            </Text>
-                        </TouchableOpacity>
-                    )}
+        // console.log(this.state.tanDogs);
+        return (
+            <View>
+                <TextInput
+                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                    onChangeText={(text) => this.setState({text})}
+                    value={this.state.text}
                 />
+                <Text >
+                    {this.state.dogInfo}
+
+                </Text>
             </View>
-            : <View style={styles.container}>
-                <Text style={styles.loadingText}>LOADING...</Text>
-                <ActivityIndicator size="large" color="#00ff00" />
-            </View>
-            ;
+        );
     }
-
-
 }
 
 const styles = StyleSheet.create({
     container: {
+        height: 500,
         backgroundColor: '#F5FCFF',
         flex: 1,
         paddingTop: 25,
