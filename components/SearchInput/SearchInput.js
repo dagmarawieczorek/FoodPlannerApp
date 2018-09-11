@@ -49,6 +49,10 @@ class SearchInput extends Component {
         });
 
         if (typeof this.props.newFoodAdded === 'function') {
+            this.setState({
+                query: name,
+            });
+
             this.props.newFoodAdded( {
                 id,
                 name,
@@ -56,7 +60,6 @@ class SearchInput extends Component {
                 subcategory,
                 price
             });
-
         }
     }
 
@@ -65,8 +68,8 @@ class SearchInput extends Component {
         const foods = this.findfood(query);
         const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
 
-
-
+        console.log(this.state.query);
+        // console.log(this.state.newItems);
         return (
             <View style={styles.container}>
                 <Autocomplete

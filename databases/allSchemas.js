@@ -32,32 +32,9 @@ const databaseOptions = {
     schemaVersion: 0,
 }
 
-export const insertNewRecipe = newRecipe => new Promise((resolve, reject) => {
-
-    Realm.open(databaseOptions).then(realm => {
-        realm.write(() => {
-            realm.create(RECIPE_SCHEMA, newRecipe);
-            resolve(newRecipe);
-        })
-    }).catch((error) => reject(error));
-})
-
-export const insertNewIngredient = newIngredient => new Promise((resolve, reject) => {
-
-    Realm.open(databaseOptions).then(realm => {
-        realm.write(() => {
-            realm.create(INGREDIENT_SCHEMA, newIngredient);
-            resolve(newIngredient);
-        })
-    }).catch((error) => reject(error));
-})
-
-export const findIngredient = name => {
-    Realm.open(databaseOptions).then(realm => {
-        let ingredients = realm.objects(INGREDIENT_SCHEMA).filtered('name = "' + name + '"');
-        console.log(ingredients);
-    });
-}
+export const openRealm = () => {
+    return Realm.open(databaseOptions);
+};
 
 export default new Realm(databaseOptions);
 
