@@ -7,13 +7,11 @@ class FoodList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-                sum:0
+            sum: 0
         };
     }
 
     render() {
-
-
 
         return (<View style={styles.container}>
                 <Text style={styles.h2text}>

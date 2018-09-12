@@ -1,22 +1,21 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import SearchInput from "./components/SearchInput/SearchInput";
 import FoodList from "./components/FoodList/FoodList";
-import insertNewIngredient from "./databases/allSchemas.js";
 
 let app = class App extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            newList:[],
+            newList: [],
         }
     }
 
     handleAddedFood = (foodlist) => {
-    this.setState({
-        newList:[...this.state.newList, foodlist]
-    })
+        this.setState({
+            newList: [...this.state.newList, foodlist]
+        })
     };
 
 
@@ -27,15 +26,13 @@ let app = class App extends Component {
             <SearchInput
                 newFoodAdded={this.handleAddedFood}/>
             <FoodList list={this.state.newList}/>
-
-
         </View>;
     }
 };
 
 const styles = StyleSheet.create({
-    mainContainer:{
-        flex:1,
+    mainContainer: {
+        flex: 1,
     }
 })
 

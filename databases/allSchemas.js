@@ -9,7 +9,7 @@ export const IngredientsSchema = {
     primaryKey: 'id',
     properties: {
         id: 'int',
-        name: {type: 'string'},
+        name: {type: 'string', indexed: true},
         category: {type: 'string', indexed: true},
         subcategory: {type: 'string', indexed: true},
         price: {type: 'float'}
