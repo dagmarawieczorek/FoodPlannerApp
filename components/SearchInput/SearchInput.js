@@ -1,6 +1,7 @@
 import Autocomplete from 'react-native-autocomplete-input';
 import React, {Component} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import realm from '../../databases/allSchemas';
 
 const API = 'https://api.myjson.com/bins/1bnz0w';
 
@@ -27,20 +28,26 @@ class SearchInput extends Component {
     }
 
     componentDidMount() {
-        fetch(`${API}`).then(res => res.json()).then((foods) => {
-            this.setState({foods});
-        });
-
+        if (realm.objects("Ingredient").length === 0) {
+            fetch(`${API}`).then(res => res.json()).then((foods) => {
+                console.log(foods);
+                realm.write(() => {
+                    for (let i = 0; i < foods.length; i++) {
+                        realm.create("Ingredient", foods[i]);
+                        console.log("Saving " + foods[i].name);
+                    }
+                });
+            });
+        }
     }
 
-    findfood(query) {
-        if (query === '') {
+    findfood() {
+        if (this.state.query === '') {
             return [];
         }
 
-        const {foods} = this.state;
-        const regex = new RegExp(`${query.trim()}`, 'i');
-        return foods.filter(food => food.name.search(regex) >= 0);
+        let realmFoods = realm.objects("Ingredient").filtered(`name BEGINSWITH[c] '${this.state.query}'`);
+        return Array.from(realmFoods);
     }
 
     handleAddedFood = (name, id, category, subcategory, price) => {
@@ -53,7 +60,7 @@ class SearchInput extends Component {
                 query: name,
             });
 
-            this.props.newFoodAdded( {
+            this.props.newFoodAdded({
                 id,
                 name,
                 category,
@@ -82,7 +89,7 @@ class SearchInput extends Component {
                     placeholder="Enter food name"
                     renderItem={({id, name, category, subcategory, price}) => (
                         <TouchableOpacity
-                            onPress={()=>this.handleAddedFood(name, id, category, subcategory, price)}
+                            onPress={() => this.handleAddedFood(name, id, category, subcategory, price)}
                         >
                             <Text style={styles.itemText}>
                                 {name}
@@ -125,6 +132,7 @@ const
 
         },
         itemText: {
+            flexDirection: "row",
             fontSize: 15,
             margin: 2
         },
