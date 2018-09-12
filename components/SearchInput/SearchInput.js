@@ -3,20 +3,10 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import realm from '../../databases/allSchemas';
 
+
 const API = 'https://api.myjson.com/bins/1bnz0w';
 
 class SearchInput extends Component {
-    static renderfood(food) {
-        const {name, category, price, id, subcategory} = food;
-
-        return (
-            <View>
-                <Text style={styles.nameText}> {name}</Text>
-                <Text style={styles.directorText}>({category})</Text>
-                <Text style={styles.openingText}>{price}</Text>
-            </View>
-        );
-    }
 
     constructor(props) {
         super(props);
@@ -70,6 +60,10 @@ class SearchInput extends Component {
         }
     }
 
+    onPressAddFood() {
+        console.log("klikklik")
+    }
+
     render() {
         const {query} = this.state;
         const foods = this.findfood(query);
@@ -79,90 +73,64 @@ class SearchInput extends Component {
         // console.log(this.state.newItems);
         return (
             <View style={styles.container}>
-                <Autocomplete
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    containerStyle={styles.autocompleteContainer}
-                    data={foods.length === 1 && comp(query, foods[0].name) ? [] : foods}
-                    defaultValue={query}
-                    onChangeText={text => this.setState({query: text})}
-                    placeholder="Enter food name"
-                    renderItem={({id, name, category, subcategory, price}) => (
-                        <TouchableOpacity
-                            onPress={() => this.handleAddedFood(name, id, category, subcategory, price)}
-                        >
-                            <Text style={styles.itemText}>
-                                {name}
-                            </Text>
-                        </TouchableOpacity>
-                    )}
-                />
-                <View style={styles.descriptionContainer}>
-                    {foods.length > 0 ? (
-                        SearchInput.renderfood(foods[0])
-                    ) : (
-                        <Text style={styles.infoText}>
-                            Enter food
-                        </Text>
-                    )}
+                <View style={styles.topMenu}>
+                    <Autocomplete
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        containerStyle={styles.autocompleteContainer}
+                        data={foods.length === 1 && comp(query, foods[0].name) ? [] : foods}
+                        defaultValue={query}
+                        onChangeText={text => this.setState({query: text})}
+                        renderItem={({id, name, category, subcategory, price}) => (
+                            <TouchableOpacity
+                                onPress={() => this.handleAddedFood(name, id, category, subcategory, price)}
+                            >
+                                <Text style={styles.itemText}>
+                                    {name}
+                                </Text>
+                            </TouchableOpacity>
+                        )}
+                    />
+
                 </View>
+
             </View>
+
         );
     }
 }
 
-const
-    styles = StyleSheet.create({
-        container: {
+const styles = StyleSheet.create({
+    topMenu: {
+        zIndex: 5,
+        backgroundColor: '#F5FCFF',
+        flex: 1,
+        padding: 50,
+        paddingBottom: 60,
+        justifyContent: "space-between",
 
-            zIndex: 5,
-            backgroundColor: '#F5FCFF',
-            flex: 1,
-            height: 30,
-            padding: 70,
-        },
+    },
 
-        autocompleteContainer: {
-            flex: 1,
-            left: 0,
-            right: 0,
-            top: 0,
-            position: 'absolute',
-            zIndex: 4,
+    container: {
+        zIndex: 5,
+        backgroundColor: '#F5FCFF',
 
-        },
-        itemText: {
-            flexDirection: "row",
-            fontSize: 15,
-            margin: 2
-        },
-        descriptionContainer: {
-            // `backgroundColor` needs to be set otherwise the
-            // autocomplete input will disappear on text input.
-            backgroundColor: '#F5FCFF',
-            marginTop: 25
+    },
 
-        },
-        infoText: {
-            textAlign: 'center'
+    autocompleteContainer: {
+        flex: 1,
+        left: 0,
+        right: 0,
+        top: 0,
+        position: 'absolute',
+        zIndex: 4,
 
-        },
-        nameText: {
-            fontSize: 18,
-            fontWeight: '500',
-            marginBottom: 10,
-            marginTop: 10,
-            textAlign: 'center'
-        },
-        directorText: {
-            color: 'grey',
-            fontSize: 12,
-            marginBottom: 10,
-            textAlign: 'center'
-        },
-        openingText: {
-            textAlign: 'center'
-        }
-    });
+    },
+    itemText: {
+        flexDirection: "row",
+        fontSize: 15,
+        margin: 2
+    },
+});
 
 export default SearchInput;
