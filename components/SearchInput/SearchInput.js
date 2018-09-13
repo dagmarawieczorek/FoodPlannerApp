@@ -1,7 +1,7 @@
-import Autocomplete from 'react-native-autocomplete-input';
 import React, {Component} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {FlatList, StyleSheet, View, Text} from 'react-native';
 import realm from '../../databases/allSchemas';
+import {ListItem, Toolbar} from "react-native-material-ui";
 
 
 const API = 'https://api.myjson.com/bins/1bnz0w';
@@ -60,6 +60,8 @@ class SearchInput extends Component {
         }
     }
 
+
+
     onPressAddFood() {
         console.log("klikklik")
     }
@@ -69,40 +71,42 @@ class SearchInput extends Component {
         const foods = this.findfood(query);
         const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
 
+
         console.log(this.state.query);
-        // console.log(this.state.newItems);
+        // console.log(this.statea.newItems);
         return (
-            <View style={styles.container}>
-                <View style={styles.topMenu}>
-                    <Autocomplete
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        containerStyle={styles.autocompleteContainer}
-                        data={foods.length === 1 && comp(query, foods[0].name) ? [] : foods}
-                        defaultValue={query}
-                        onChangeText={text => this.setState({query: text})}
-                        renderItem={({id, name, category, subcategory, price}) => (
-                            <TouchableOpacity
-                                onPress={() => this.handleAddedFood(name, id, category, subcategory, price)}
-                            >
-                                <Text style={styles.itemText}>
-                                    {name}
-                                </Text>
-                            </TouchableOpacity>
-                        )}
-                    />
-
-                </View>
-
+            <View>
+                <Toolbar
+                    centerElement="Dodaj składniki"
+                    searchable={{
+                        autoFocus: true,
+                        placeholder: "add items",
+                        onChangeText: text => this.setState({query: text}),
+                    }}
+                />
+                <FlatList
+                    windowSize={21}
+                    data={foods}
+                    renderItem={({item}) => (
+                        <ListItem
+                            divider
+                            centerElement={{
+                                primaryText: `${item.name}`,
+                            }}
+                            onPress={() => {
+                                this.handleAddedFood(item.name, item.id, item.category, item.subcategory, item.price);
+                            }}>
+                        </ListItem>
+                    )}
+                    keyExtractor={item => item.id + ""}
+                />
             </View>
-
         );
     }
 }
 
 const styles = StyleSheet.create({
     topMenu: {
-        zIndex: 5,
         backgroundColor: '#F5FCFF',
         flex: 1,
         padding: 50,
@@ -112,7 +116,6 @@ const styles = StyleSheet.create({
     },
 
     container: {
-        zIndex: 5,
         backgroundColor: '#F5FCFF',
 
     },

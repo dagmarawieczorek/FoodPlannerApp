@@ -1,14 +1,15 @@
-import React, {Component} from 'react';
-import { StyleSheet} from 'react-native';
+import React from 'react';
+import {StyleSheet} from 'react-native';
 
 
 const styles = StyleSheet.create({
-    topMenu:{
+    topMenu: {
         zIndex: 5,
         backgroundColor: '#F5FCFF',
         flex: 1,
+        flexDirection: "row",
         padding: 50,
-        paddingBottom:60,
+        paddingBottom: 60,
         justifyContent: "space-between",
 
     },
@@ -34,19 +35,36 @@ const styles = StyleSheet.create({
         margin: 2
     },
 
-    popUpBox:{
+    popUpBox: {
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        borderColor: 'gray', borderWidth: 5
     },
 
-    insideModalBox:{
-        width: 300,
-        height: 300,
-        backgroundColor: "aliceblue",
-        borderRadius: 20,
-    }
+
+    popUpInputBox: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    input: {
+        height: 40,
+        width: 100,
+        borderColor: 'gray',
+        borderWidth: 1,
+        borderRadius: 15,
+    },
+    inputSmall: {
+        height: 40,
+        width: 40,
+        borderColor: 'gray',
+        borderWidth: 1,
+        borderRadius: 15,
+    },
+
 });
 
-export default  styles;
+export default styles;

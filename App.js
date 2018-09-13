@@ -1,18 +1,41 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import SearchInput from "./components/SearchInput/SearchInput";
 import FoodList from "./components/FoodList/FoodList";
-import AddFoodBtn from "./components/buttonAddFood/buttonAddFood.js";
 import PopUpAdd from "./components/PopUpAdd/PopUpAdd.js";
+import {ActionButton, COLOR, getTheme, ThemeContext} from 'react-native-material-ui';
 
-let app = class App extends Component {
+// you can set your style right here, it'll be propagated to application
+const uiTheme = {
+    palette: {
+        primaryColor: COLOR.lime500,
+    },
+    toolbar: {
+        container: {
+            height: 50,
+        },
+    },
+};
+
+
+let app = class Main extends Component {
+    render() {
+        return (
+            <ThemeContext.Provider value={getTheme(uiTheme)}>
+                <App/>
+            </ThemeContext.Provider>
+        );
+    }
+}
+
+class App extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             newList: [],
             modalVisible: false,
-            newItemToRealm:"",
+            newItemToRealm: "",
         }
     }
 
@@ -23,6 +46,7 @@ let app = class App extends Component {
     };
 
     handleButtonAdd = (isclicked) => {
+        console.log("IS CLICKED!! " + isclicked);
         this.setState({
             modalVisible: isclicked,
         })
@@ -35,37 +59,34 @@ let app = class App extends Component {
     };
 
     render() {
-        return <View>
+        return <View style={{
+            flex: 1,
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
+            top: 0
+        }}>
             <PopUpAdd plusClicked={this.handleButtonAdd}
-                visibility={this.state.modalVisible}
-                newItem={this.handleNewText}
+                      visibility={this.state.modalVisible}
+                      newItem={this.handleNewText}
             />
-            <View style={styles.topMenu}>
-                <AddFoodBtn plusClicked={this.handleButtonAdd}/>
+            <View>
                 <SearchInput
                     newFoodAdded={this.handleAddedFood}/>
+                <FoodList list={this.state.newList}
+                          style={{flex: 1}}/>
             </View>
-            <Text>{this.state.newItemToRealm}</Text>
-            <FoodList list={this.state.newList}/>
+
+            <ActionButton
+                onPress={() => this.handleButtonAdd(true)}/>
         </View>;
 
     }
 }
 
-
 export default app;
-
 
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-    },
-
-    topMenu: {
-        // zIndex: 5,
-        // flex: 1,
-        // // flexDirection: "row",
-        // left: 0,
-        // right: 0,
     },
 })

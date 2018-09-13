@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native'
+import {Card, ListItem} from 'react-native-material-ui';
 
 
 class FoodList extends Component {
@@ -15,31 +16,37 @@ class FoodList extends Component {
             }
         }
 
+
         return (
 
-            <View style={styles.container}>
-                <View style={styles.flatview}>
-                    <Text style={styles.h2text}>
+            <View >
+                <View >
+                    <Text >
                         Lista zakupów
                     </Text>
                 </View>
-                <View style={styles.flatlist}>
+                <View >
                     <FlatList
                         windowSize={21}
                         data={this.props.list}
                         renderItem={({item}) => (
-                            <View style={styles.flatview}>
-                                <Text style={styles.name}>{item.name} | {item.category}  </Text>
-
-                                <Text style={styles.price}>{item.price}zł</Text>
-                            </View>
+                            <ListItem
+                                divider
+                                centerElement={{
+                                    primaryText: `${item.name} | ${item.category} |${item.price}`,
+                                }}
+                                onPress={() => {
+                                }}>
+                            </ListItem>
                         )}
 
                         keyExtractor={item => item.id + ""}
                     />
                 </View>
-                <View style={styles.flatview}>
-                    <Text style={styles.h2text}>Suma zakupów : {sumPrice}zł</Text>
+                <View>
+                    <Card>
+                        <Text>Sumaa : {sumPrice}zł</Text>
+                    </Card>
                 </View>
             </View>
         );
@@ -47,50 +54,3 @@ class FoodList extends Component {
 }
 
 export default FoodList;
-
-const styles = StyleSheet.create({
-    container: {
-        width: 500,
-        backgroundColor: '#F5FCFF',
-
-        top: 0
-    },
-
-    h2text: {
-        marginTop: 2,
-        fontFamily: 'Helvetica',
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
-
-    flatview: {
-        paddingTop: 10,
-        borderRadius: 2,
-        flexDirection: "column",
-        alignItems: "flex-start",
-        justifyContent: "flex-end",
-    },
-
-    flatlist: {
-        flexDirection: "row",
-        alignItems: "center",
-
-        width: "auto",
-        height: "60%",
-    },
-    name: {
-        fontFamily: 'Verdana',
-        fontSize: 16
-    },
-    price: {
-        fontSize: 16,
-        textAlign: "center",
-        color: "white",
-        backgroundColor: "gray",
-        flexDirection: "row",
-        width: 50
-    }
-
-});
-
-

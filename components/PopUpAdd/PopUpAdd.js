@@ -1,26 +1,40 @@
 import React, {Component} from 'react';
-import {Button, Modal, Text, TextInput, TouchableHighlight, View} from 'react-native';
+import {Modal, View} from 'react-native';
 import styles from "../../styles/styles";
+import PopUpInput from "../PopUpInput/PopUpInput.js";
+
 
 class PopUpAdd extends Component {
 
 
-    // setModalVisible() {
-    // this.setState(this.props.visibility(false));
+    constructor(props) {
+        super(props);
+
+        console.log("!!!!! " + this.props.visibility);
+
+        this.state = {
+            newItem: {}
+        };
+    }
+
+
     visibility() {
         this.setState({
             modalVisible: false,
         })
     }
 
-
     handleButtonAdd() {
         this.props.plusClicked(false)
     }
 
-    handleNewText(text){
-        this.props.newItem(text)
-    }
+
+    handleAddedFood = (foodlist) => {
+        this.setState({
+            newList: [...this.state.newList, foodlist]
+        })
+    };
+
 
     render() {
         return (
@@ -36,20 +50,12 @@ class PopUpAdd extends Component {
                     <View style={styles.popUpBox}>
                         <View style={styles.insideModalBox}>
 
-                            <TextInput
-                                style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                                onChangeText={(text) => this.handleNewText(text)}
-                                value={""}
-
+                            <PopUpInput newFoodAdded={this.handleAddedFood}
+                                        onClose={() => this.handleButtonAdd()}
                             />
 
+                            {this.props.children}
 
-                            <Button
-                            onPress={() => this.handleButtonAdd()}
-                            title="+"
-                            color="gray"
-                            accessibilityLabel="add"
-                        />
                         </View>
                     </View>
                 </Modal>
