@@ -9,9 +9,6 @@ class PopUpAdd extends Component {
 
     constructor(props) {
         super(props);
-
-        console.log("!!!!! " + this.props.visibility);
-
         this.state = {
             newItem: {}
         };

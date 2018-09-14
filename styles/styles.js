@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 
 
+
 const styles = StyleSheet.create({
     topMenu: {
         zIndex: 5,
@@ -31,8 +32,9 @@ const styles = StyleSheet.create({
     },
     itemText: {
         flexDirection: "row",
-        fontSize: 15,
-        margin: 2
+        fontSize: 20,
+        margin: 2,
+        color: "#3C3530",
     },
 
     popUpBox: {
@@ -40,14 +42,15 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        borderColor: 'gray', borderWidth: 5
+        borderColor: 'gray', borderWidth: 5,
     },
 
 
     popUpInputBox: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'flex-end',
+
     },
 
     input: {

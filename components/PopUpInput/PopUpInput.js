@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Picker, Text, TextInput, View} from 'react-native';
 import styles from "../../styles/styles.js";
+import colors from "../../styles/colors.js";
 import realm from "../../databases/allSchemas";
 import data from "../../databases/categories";
 import {Card, Dialog, DialogDefaultActions} from 'react-native-material-ui';
@@ -112,6 +113,7 @@ class PopUpInput extends Component {
 
                         <Text>Wybierz kategorie</Text>
                         <Picker
+                            borderColor="blue"
                             selectedValue={this.state.pickedCat}
                             style={{height: 30, width: 180}}
                             mode="dropdown"
