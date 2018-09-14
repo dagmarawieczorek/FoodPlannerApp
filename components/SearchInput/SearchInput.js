@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {FlatList, StyleSheet, View, Text} from 'react-native';
 import realm from '../../databases/allSchemas';
-import {ListItem, Toolbar} from "react-native-material-ui";
+import {ListItem, Toolbar, IconToggle} from "react-native-material-ui";
 
 
 const API = 'https://api.myjson.com/bins/1bnz0w';
@@ -77,6 +77,7 @@ class SearchInput extends Component {
         return (
             <View>
                 <Toolbar
+                    leftElement="add-shopping-cart"
                     centerElement="Dodaj składniki"
                     searchable={{
                         autoFocus: true,

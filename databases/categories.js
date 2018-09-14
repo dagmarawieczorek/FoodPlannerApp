@@ -1,6 +1,7 @@
 let categories=[
     {
         title: 'groceries',
+        icon: "done",
         items: ["Salt and sugar",
             "Flour",
             "Pasta, rice and groats",
@@ -19,6 +20,7 @@ let categories=[
     },
     {
         title: 'dairy',
+        icon: "done",
         items: ["Milk",
             "Yoghurt",
             "Sour cream",
@@ -31,6 +33,7 @@ let categories=[
 
     {
         title: 'fruits and vegetables',
+        icon: "done",
         items: ["Fruits",
             "Vegetables",
             "Salads",
@@ -42,6 +45,7 @@ let categories=[
 
     {
         title: "Pastry bakery",
+        icon: "done",
         items: ["Bread",
             "Packaged bread",
             "Rolls",
@@ -55,7 +59,7 @@ let categories=[
 
     {
         title: "Drinks",
-
+        icon: "done",
         items: [
             "Tea",
             "Coffee",

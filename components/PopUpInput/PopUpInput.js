@@ -3,7 +3,7 @@ import {Picker, Text, TextInput, View} from 'react-native';
 import styles from "../../styles/styles.js";
 import realm from "../../databases/allSchemas";
 import data from "../../databases/categories";
-import {Dialog, DialogDefaultActions} from 'react-native-material-ui';
+import {Card, Dialog, DialogDefaultActions} from 'react-native-material-ui';
 
 
 class PopUpInput extends Component {
@@ -51,8 +51,6 @@ class PopUpInput extends Component {
 
     handleButtonNewItem = () => {
 
-        console.log("Handle button new item");
-
         if (this.state.newItemName !== "" && this.state.newItemPrice !== 0) {
 
             let newId = realm.objects("Ingredient").length + 1;
@@ -90,43 +88,50 @@ class PopUpInput extends Component {
         return (<View style={styles.popUpInputBox}>
 
             <Dialog>
-                <Dialog.Title><Text>Wpisz nazwę | Cene</Text></Dialog.Title>
-                <Dialog.Content>
+
+                <Dialog.Content >
+                    <View style={ {flexWrap: 'wrap',
+                        alignItems: 'flex-start',
+                        flexDirection:'row',
+
+                    justifyContent: "center"}}>
+                        <Text>Wpisz nazwę i cene</Text>
+                            <TextInput
+                                style={{height: 40, width: 130, left: 0, flexDirection:'column',}}
+                                label="nazwa"
+                                onChangeText={text => this.setState({newItemName: text})}
+                                value={this.state.newItemName}
+                            />
+                            <TextInput
+                                style={{height: 40, width: 50, flexDirection:'column',}}
+                                keyboardType="numeric"
+                                label="cena"
+                                onChangeText={text => this.setState({newItemPrice: text})}
+                                value={this.state.newItemPrice}
+                            />
+
+                        <Text>Wybierz kategorie</Text>
+                        <Picker
+                            selectedValue={this.state.pickedCat}
+                            style={{height: 30, width: 180}}
+                            mode="dropdown"
+                            onValueChange={this.handleCategoryChange}>
+                            {lisCategory}
+                        </Picker>
 
 
-                    <TextInput
-                        style={{height: 40, width: 200, borderColor: 'gray', borderWidth: 1}}
-                        onChangeText={text => this.setState({newItemName: text})}
-                        value={this.state.newItemName}
-                    />
+                        {/*/pick subcategory*/}
 
-                    <TextInput
-                        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                        keyboardType="numeric"
-                        onChangeText={text => this.setState({newItemPrice: text})}
-                        value={this.state.newItemPrice}
-                    />
+                        <Text>Wybierz podkategorie</Text>
+                        <Picker
+                            selectedValue={this.state.pickedSubcat}
+                            style={{height: 30, width: 180}}
+                            mode="dropdown"
+                            onValueChange={this.handleSubcategoryChange}>
+                            {lisSubcategory}
+                        </Picker>
+                    </View>
 
-
-                    <Text>Wybierz kategorie</Text>
-                    {/*/pick category*/}
-                    <Picker
-                        selectedValue={this.state.pickedCat}
-                        style={{height: 50, width: 300}}
-                        mode="dropdown"
-                        onValueChange={this.handleCategoryChange}>
-                        {lisCategory}
-                    </Picker>
-
-
-                    {/*/pick subcategory*/}
-                    <Picker
-                        selectedValue={this.state.pickedSubcat}
-                        style={{height: 50, width: 300}}
-                        mode="dropdown"
-                        onValueChange={this.handleSubcategoryChange}>
-                        {lisSubcategory}
-                    </Picker>
                 </Dialog.Content>
                 <Dialog.Actions>
                     <DialogDefaultActions
