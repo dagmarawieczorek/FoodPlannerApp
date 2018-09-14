@@ -42,7 +42,6 @@ class PopUpAdd extends Component {
                     transparent={true}
                     visible={this.props.visibility}
                     onRequestClose={() => {
-                        alert('Dodano produkt.');
                     }}>
                     <View style={styles.popUpBox}>
                         <View style={styles.insideModalBox}>

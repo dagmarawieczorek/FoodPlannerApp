@@ -2,9 +2,9 @@ import React from 'react';
 
 
 const colors = {
-    bgColor: "#f9fff6",
+    bgColor: "#d8ffd7",
     dividerColor: "#754F44",
-    cardColor:"#6cb6b8"
+    cardColor:"#d8ffd7"
 };
 
 export default colors;

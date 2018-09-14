@@ -18,9 +18,11 @@ class FoodList extends Component {
 
     renderHeader = () => {
         return (
-            <Text style={styles.itemText}>
-                Lista zakupów
-            </Text>)
+            <Card>
+                <Text style={styles.itemText}>
+                    Lista zakupów
+                </Text>
+            </Card>)
     }
     renderFooter = () => {
 
@@ -30,7 +32,7 @@ class FoodList extends Component {
             <Card>
                 <Text style={styles.itemText}>
                     <Icon name="attach-money"/>
-                    Suma :{this.props.sum}zł</Text>
+                    Suma : {this.props.sum.toFixed(2)}zł</Text>
             </Card>
         </View>)
 
@@ -61,8 +63,7 @@ class FoodList extends Component {
                                     itemStyle={{
                                         flex: 1,
                                         flexDirection: "column",
-                                        backgroundColor: colors.itemsBgColor,
-                                        color: colors.dividerColor,
+                                        backgroundColor: colors.cardColor,
                                         fontFamily: "Ebrima",
                                         fontSize: 15
                                     }}
@@ -71,7 +72,7 @@ class FoodList extends Component {
                                         return category.title === item.category;
                                     }).icon}
                                     centerElement={{
-                                        primaryText: `${item.name} ${item.category}  ${item.price}zł`,
+                                        primaryText: `${item.name} ${item.price.toFixed(2)}zł`,
                                     }}
                                     onPress={() => {
 
@@ -81,7 +82,7 @@ class FoodList extends Component {
                             </Card>
                         )}
 
-                        keyExtractor={item => item.id + ""+ Math.floor((Math.random() *5) + 100)}
+                        keyExtractor={item => item.id + "" + Math.floor((Math.random() * 5) + 100)}
                     />
 
                 </View>

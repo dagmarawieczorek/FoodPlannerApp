@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import {Picker, Text, TextInput, View} from 'react-native';
 import styles from "../../styles/styles.js";
-import colors from "../../styles/colors.js";
 import realm from "../../databases/allSchemas";
 import data from "../../databases/categories";
-import {Card, Dialog, DialogDefaultActions} from 'react-native-material-ui';
+import {Dialog, DialogDefaultActions} from 'react-native-material-ui';
 
 
 class PopUpInput extends Component {
@@ -68,6 +67,8 @@ class PopUpInput extends Component {
                 realm.create("Ingredient", newProduct);
                 console.log("Saving " + newProduct.name);
             });
+
+            alert(`Dodano ${newProduct.name} do bazy produktów!`);
         }
 
 
@@ -90,26 +91,28 @@ class PopUpInput extends Component {
 
             <Dialog>
 
-                <Dialog.Content >
-                    <View style={ {flexWrap: 'wrap',
+                <Dialog.Content>
+                    <View style={{
+                        flexWrap: 'wrap',
                         alignItems: 'flex-start',
-                        flexDirection:'row',
+                        flexDirection: 'row',
 
-                    justifyContent: "center"}}>
-                        <Text>Wpisz nazwę i cene</Text>
-                            <TextInput
-                                style={{height: 40, width: 130, left: 0, flexDirection:'column',}}
-                                label="nazwa"
-                                onChangeText={text => this.setState({newItemName: text})}
-                                value={this.state.newItemName}
-                            />
-                            <TextInput
-                                style={{height: 40, width: 50, flexDirection:'column',}}
-                                keyboardType="numeric"
-                                label="cena"
-                                onChangeText={text => this.setState({newItemPrice: text})}
-                                value={this.state.newItemPrice}
-                            />
+                        justifyContent: "center"
+                    }}>
+                        <Text style={styles.itemText}>Wpisz nazwę i cene</Text>
+                        <TextInput
+                            style={{height: 40, width: 130, left: 0, flexDirection: 'column',}}
+                            label="nazwa"
+                            onChangeText={text => this.setState({newItemName: text})}
+                            value={this.state.newItemName}
+                        />
+                        <TextInput
+                            style={{height: 40, width: 50, flexDirection: 'column',}}
+                            keyboardType="numeric"
+                            label="cena"
+                            onChangeText={text => this.setState({newItemPrice: text})}
+                            value={this.state.newItemPrice}
+                        />
 
                         <Text>Wybierz kategorie</Text>
                         <Picker

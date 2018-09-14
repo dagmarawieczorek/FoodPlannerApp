@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     },
     itemText: {
         flexDirection: "row",
-        fontSize: 20,
+        fontSize: 18,
         margin: 2,
         color: "#3C3530",
     },
