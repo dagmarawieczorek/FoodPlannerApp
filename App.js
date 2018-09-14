@@ -12,9 +12,9 @@ console.log(colors.itemsBgColor);
 
 const uiTheme = {
     palette: {
-        primaryColor: "#285943",
+        primaryColor: "#754F44",
         secondaryTextColor: "#000000",
-        accentColor: "#8CD790",
+        accentColor: "#c16346",
 
     },
     toolbar: {
@@ -25,7 +25,9 @@ const uiTheme = {
     card: {
         container: {
             backgroundColor: colors.cardColor,
-        }
+            padding: 5,
+        },
+
     },
 
     divider: {
@@ -38,7 +40,7 @@ const uiTheme = {
 
     listItem: {
         container: {
-            backgroundColor: colors.itemsBgColor,
+            backgroundColor: colors.listColor,
         }
     }
 
@@ -88,7 +90,7 @@ class App extends Component {
     };
 
     render() {
-        return <View   style={{...StyleSheet.absoluteFillObject}}>
+        return <View   style={{...StyleSheet.absoluteFillObject, backgroundColor:colors.bgAll}}>
             <PopUpAdd plusClicked={this.handleButtonAdd}
                       visibility={this.state.modalVisible}
                       newItem={this.handleNewText}

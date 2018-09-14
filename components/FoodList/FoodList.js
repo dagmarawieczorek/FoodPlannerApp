@@ -31,7 +31,7 @@ class FoodList extends Component {
             <Divider/>
             <Card>
                 <Text style={styles.itemText}>
-                    <Icon name="attach-money"/>
+                    <Icon name="attach-money" style={{color:"white", paddingTop:15,}}/>
                     Suma : {this.props.sum.toFixed(2)}zł</Text>
             </Card>
         </View>)
@@ -48,7 +48,7 @@ class FoodList extends Component {
             <View>
 
 
-                <View style={{...StyleSheet.absoluteFillObject, flex: 1, height: height - 175}}>
+                <View style={{...StyleSheet.absoluteFillObject, flex: 1, height: height - 130, backgroundColor:colors.bgAll}}>
 
                     <FlatList
                         style={{...StyleSheet.absoluteFillObject}}
@@ -58,7 +58,6 @@ class FoodList extends Component {
                         ListHeaderComponent={this.renderHeader}
                         renderItem={({item}) => (
 
-                            <Card>
                                 <ListItem
                                     itemStyle={{
                                         flex: 1,
@@ -79,7 +78,6 @@ class FoodList extends Component {
                                     }}>
                                 </ListItem>
 
-                            </Card>
                         )}
 
                         keyExtractor={item => item.id + "" + Math.floor((Math.random() * 5) + 100)}
