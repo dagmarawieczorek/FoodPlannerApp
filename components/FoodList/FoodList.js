@@ -12,7 +12,8 @@ class FoodList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            sumPrice: 0
+            sumPrice: 0,
+            boughtList: [],
         };
     }
 
@@ -31,24 +32,55 @@ class FoodList extends Component {
             <Divider/>
             <Card>
                 <Text style={styles.itemText}>
-                    <Icon name="attach-money" style={{color:"white", paddingTop:15,}}/>
+                    <Icon name="attach-money" style={{color: "white", paddingTop: 15,}}/>
                     Suma : {this.props.sum.toFixed(2)}zł</Text>
             </Card>
+
+                <FlatList
+                    style={{...StyleSheet.absoluteFillObject}}
+                    windowSize={21}
+                    data={this.state.boughtList}
+                    renderItem={({item}) => (
+
+                        <ListItem
+                            itemStyle={{
+                                flex: 1,
+                                flexDirection: "column",
+                                backgroundColor: colors.cardColor,
+                                fontFamily: "Ebrima",
+                                fontSize: 15
+                            }}
+                            divider
+                            centerElement={{
+                                primaryText: `${item.name} ${item.price.toFixed(2)}zł`,
+                            }}
+                            onPress={() => {
+
+                            }}>
+                        </ListItem>
+
+                    )}
+
+                    keyExtractor={item => item.id + "" + Math.floor((Math.random() * 5) + 100)}
+                />
+
         </View>)
 
     }
 
     render() {
-
         var {height} = Dimensions.get('window');
-
 
         return (
 
             <View>
 
-
-                <View style={{...StyleSheet.absoluteFillObject, flex: 1, height: height - 130, backgroundColor:colors.bgAll}}>
+                <View style={{
+                    ...StyleSheet.absoluteFillObject,
+                    flex: 1,
+                    height: height - 130,
+                    backgroundColor: colors.bgAll
+                }}>
 
                     <FlatList
                         style={{...StyleSheet.absoluteFillObject}}
@@ -58,33 +90,37 @@ class FoodList extends Component {
                         ListHeaderComponent={this.renderHeader}
                         renderItem={({item}) => (
 
-                                <ListItem
-                                    itemStyle={{
-                                        flex: 1,
-                                        flexDirection: "column",
-                                        backgroundColor: colors.cardColor,
-                                        fontFamily: "Ebrima",
-                                        fontSize: 15
-                                    }}
-                                    divider
-                                    leftElement={categories.find(category => {
-                                        return category.title === item.category;
-                                    }).icon}
-                                    centerElement={{
-                                        primaryText: `${item.name} ${item.price.toFixed(2)}zł`,
-                                    }}
-                                    onPress={() => {
-
-                                    }}>
-                                </ListItem>
+                            <ListItem
+                                itemStyle={{
+                                    flex: 1,
+                                    flexDirection: "column",
+                                    backgroundColor: colors.cardColor,
+                                    fontFamily: "Ebrima",
+                                    fontSize: 15
+                                }}
+                                divider
+                                leftElement={categories.find(category => {
+                                    return category.title === item.category;
+                                }).icon}
+                                centerElement={{
+                                    primaryText: `${item.name} ${item.price.toFixed(2)}zł`,
+                                }}
+                                onPress={() => {
+                                    this.setState({
+                                        boughtList: [...this.state.boughtList, item]
+                                    })
+                                }}>
+                            </ListItem>
 
                         )}
 
                         keyExtractor={item => item.id + "" + Math.floor((Math.random() * 5) + 100)}
                     />
 
+
+                    </View>
                 </View>
-            </View>
+
         );
     }
 }

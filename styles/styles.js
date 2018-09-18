@@ -31,10 +31,10 @@ const styles = StyleSheet.create({
 
     },
     itemText: {
+        color: "white",
         flexDirection: "row",
         fontSize: 18,
         margin: 2,
-        color: "#3C3530",
     },
 
     popUpBox: {
