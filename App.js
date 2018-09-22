@@ -88,6 +88,7 @@ class App extends Component {
         })
     };
     loggedIn =() =>{
+        alert("You successfully logged in!");
         this.setState({
             loggedIn: true,
         })
