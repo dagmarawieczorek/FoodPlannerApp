@@ -8,13 +8,11 @@ import {ActionButton, getTheme, ThemeContext} from 'react-native-material-ui';
 import colors from "./styles/colors.js";
 
 
-console.log(colors.itemsBgColor);
-
 const uiTheme = {
     palette: {
-        primaryColor: "#754F44",
+        primaryColor: "#548687",
         secondaryTextColor: "#000000",
-        accentColor: "#c16346",
+        accentColor: "#56445D",
 
     },
     toolbar: {
@@ -89,6 +87,11 @@ class App extends Component {
             newItemToRealm: text,
         })
     };
+    loggedIn =() =>{
+        this.setState({
+            loggedIn: true,
+        })
+    }
 
     render() {
 
@@ -111,7 +114,7 @@ class App extends Component {
             </View>;
         }
         else {
-            return <Login/>
+            return <Login loggedIn={()=>this.loggedIn()}/>
 
         }
 

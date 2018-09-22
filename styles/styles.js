@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-
+import colors from "./colors"
 
 
 const styles = StyleSheet.create({
@@ -54,13 +54,11 @@ const styles = StyleSheet.create({
     },
 
     input: {
-        height: 40,
-backgroundColor: "rgba(255,255,255,0.5)",
-        marginBottom: 10,
-        color: "#FFF",
-        paddingHorizontal: 10
-
+        height: 50,
+        backgroundColor: "rgba(255,255,255,0.5)",
+        marginBottom: 10
     },
+
     inputSmall: {
         height: 40,
         width: 40,
@@ -69,13 +67,33 @@ backgroundColor: "rgba(255,255,255,0.5)",
         borderRadius: 15,
     },
 
-    logoContainter:{
+    logoContainter: {
         alignItems: "center",
         flexGrow: 1,
         justifyContent: "center",
     },
-    formContainter:{
+    formContainter: {
+        marginBottom: 20,
+        padding: 20,
     },
+
+    loginText: {
+
+        textAlign: "center",
+        color: "#fff",
+        fontWeight: "700"
+
+    },
+    loginButton: {
+        backgroundColor: colors.dividerColor,
+        paddingVertical: 15,
+
+    },
+    header: {
+        fontFamily: "Roboto",
+        fontSize: 25,
+        color: colors.listColor,
+    }
 
 });
 
