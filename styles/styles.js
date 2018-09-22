@@ -55,10 +55,11 @@ const styles = StyleSheet.create({
 
     input: {
         height: 40,
-        width: 100,
-        borderColor: 'gray',
-        borderWidth: 1,
-        borderRadius: 15,
+backgroundColor: "rgba(255,255,255,0.5)",
+        marginBottom: 10,
+        color: "#FFF",
+        paddingHorizontal: 10
+
     },
     inputSmall: {
         height: 40,
@@ -66,6 +67,14 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         borderWidth: 1,
         borderRadius: 15,
+    },
+
+    logoContainter:{
+        alignItems: "center",
+        flexGrow: 1,
+        justifyContent: "center",
+    },
+    formContainter:{
     },
 
 });

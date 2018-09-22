@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Modal, View} from 'react-native';
 import styles from "../../styles/styles";
-import PopUpInput from "../PopUpInput/PopUpInput.js";
+import PopUpInput from "./PopUpInput.js";
 
 
 class PopUpAdd extends Component {

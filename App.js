@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import {FlatList, StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import SearchInput from "./components/SearchInput/SearchInput";
 import FoodList from "./components/FoodList/FoodList";
 import PopUpAdd from "./components/PopUpAdd/PopUpAdd.js";
+import Login from "./components/Login/Login.js";
 import {ActionButton, getTheme, ThemeContext} from 'react-native-material-ui';
-import styles from "./styles/styles.js";
 import colors from "./styles/colors.js";
 
 
@@ -65,14 +65,15 @@ class App extends Component {
             newList: [],
             modalVisible: false,
             newItemToRealm: "",
-            sum:0,
-        }
+            sum: 0,
+            loggedIn: false,
+    }
     }
 
 
     handleAddedFood = (foodlist) => {
         this.setState({
-            sum: this.state.sum+foodlist.price,
+            sum: this.state.sum + foodlist.price,
             newList: [...this.state.newList, foodlist]
         })
     };
@@ -90,22 +91,29 @@ class App extends Component {
     };
 
     render() {
-        return <View   style={{...StyleSheet.absoluteFillObject, backgroundColor:colors.bgAll}}>
-            <PopUpAdd plusClicked={this.handleButtonAdd}
-                      visibility={this.state.modalVisible}
-                      newItem={this.handleNewText}
-            />
-            <View>
-                <SearchInput
-                    newFoodAdded={this.handleAddedFood}/>
-                <FoodList list={this.state.newList}
-                          sum={this.state.sum}
-                          style={{flex: 1}}/>
-            </View>
 
-            <ActionButton
-                onPress={() => this.handleButtonAdd(true)}/>
-        </View>;
+        if (this.state.loggedIn) {
+            return <View style={{...StyleSheet.absoluteFillObject, backgroundColor: colors.bgAll}}>
+                <PopUpAdd plusClicked={this.handleButtonAdd}
+                          visibility={this.state.modalVisible}
+                          newItem={this.handleNewText}
+                />
+                <View>
+                    <SearchInput
+                        newFoodAdded={this.handleAddedFood}/>
+                    <FoodList list={this.state.newList}
+                              sum={this.state.sum}
+                              style={{flex: 1}}/>
+                </View>
+
+                <ActionButton
+                    onPress={() => this.handleButtonAdd(true)}/>
+            </View>;
+        }
+        else {
+            return <Login/>
+
+        }
 
     }
 }
