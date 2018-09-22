@@ -3,7 +3,7 @@
 
  Still lots to do, but it's a start!
  
-<img src="https://github.com/dagmarawieczorek/FoodPlannerApp/blob/master/video-1537643257.gif?raw=true" 
+<img src="https://github.com/dagmarawieczorek/FoodPlannerApp/blob/master/images/gif-test.gif?raw=true" 
 alt="sample of app" width="300" height="auto" border="10" />
 
 
