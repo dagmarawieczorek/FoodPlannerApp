@@ -1,14 +1,18 @@
 import React, {Component} from 'react';
 import FoodListScreen from "../FoodListScreen/FoodListScreen.js";
-import {createBottomTabNavigator,} from 'react-navigation';
 import CalendarScreen from "../Calendar/Calendar";
-import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import Recipes from "../Recipes/RecipesScreen";
+import {createBottomTabNavigator,} from 'react-navigation';
+import Icon from 'react-native-vector-icons/Ionicons';
+import colors from "../../styles/colors.js";
+import { YellowBox } from 'react-native';
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
 
 const App = createBottomTabNavigator({
         Home: CalendarScreen,
         ShoppingList: FoodListScreen,
+        Recipes: Recipes,
     },
     {
         navigationOptions: ({ navigation }) => ({
@@ -16,17 +20,21 @@ const App = createBottomTabNavigator({
                 const { routeName } = navigation.state;
                 let iconName;
                 if (routeName === 'Home') {
-                    iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+                    iconName = `md-calendar`;
                 } else if (routeName === 'ShoppingList') {
-                    iconName = `ios-options${focused ? '' : '-outline'}`;
+                    iconName = `md-clipboard`;
                 }
 
-                return <Ionicons name={iconName} size={25} color={tintColor} />;
+                else if (routeName === 'Recipes') {
+                    iconName = `md-add-circle`;
+                }
+
+                return <Icon name={iconName} size={25} color={tintColor} />;
             },
         }),
         tabBarOptions: {
-            activeTintColor: 'tomato',
-            inactiveTintColor: 'gray',
+            activeTintColor: colors.bgColor,
+            inactiveTintColor: colors.cardColor,
         },
     });
 

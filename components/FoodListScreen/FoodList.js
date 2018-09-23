@@ -5,7 +5,6 @@ import styles from "../../styles/styles.js";
 import colors from "../../styles/colors.js";
 import categories from "../../databases/categories";
 
-
 class FoodList extends Component {
 
 
