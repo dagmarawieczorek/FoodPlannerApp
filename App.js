@@ -6,9 +6,9 @@ import colors from "./styles/colors";
 
 const uiTheme = {
     palette: {
-        primaryColor: "#548687",
+        primaryColor: "#56445D",
         secondaryTextColor: "#000000",
-        accentColor: "#56445D",
+        accentColor: "#548687",
 
     },
     toolbar: {

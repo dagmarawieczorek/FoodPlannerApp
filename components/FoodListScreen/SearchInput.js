@@ -20,7 +20,7 @@ class SearchInput extends Component {
     componentDidMount() {
         if (realm.objects("Ingredient").length === 0) {
             fetch(`${API}`).then(res => res.json()).then((foods) => {
-                console.log(foods);
+
                 realm.write(() => {
                     for (let i = 0; i < foods.length; i++) {
                         realm.create("Ingredient", foods[i]);
@@ -41,30 +41,28 @@ class SearchInput extends Component {
     }
 
     handleAddedFood = (name, id, category, subcategory, price) => {
-        this.setState({
-            query: name,
-        });
+
 
         if (typeof this.props.newFoodAdded === 'function') {
             this.setState({
                 query: name,
             });
 
+
+
             this.props.newFoodAdded({
                 id,
                 name,
                 category,
                 subcategory,
-                price
+                price,
+                checked:false,
+                quantity:1,
             });
         }
     }
 
 
-
-    onPressAddFood() {
-        console.log("klikklik")
-    }
 
     render() {
         const {query} = this.state;
@@ -72,16 +70,14 @@ class SearchInput extends Component {
         const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
 
 
-        console.log(this.state.query);
-        // console.log(this.statea.newItems);
         return (
             <View>
                 <Toolbar
                     leftElement="add-shopping-cart"
-                    centerElement="Dodaj składniki"
+                    centerElement="Add items to the list"
                     searchable={{
                         autoFocus: true,
-                        placeholder: "add items",
+                        placeholder: "type here",
                         onChangeText: text => this.setState({query: text}),
                     }}
                 />

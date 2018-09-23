@@ -1,6 +1,6 @@
 import {StyleSheet, View} from "react-native";
 import PopUpAdd from "../PopUpAdd/PopUpAdd";
-import SearchInput from "../SearchInput/SearchInput";
+import SearchInput from "./SearchInput";
 import FoodList from "./FoodList";
 import {ActionButton, getTheme, ThemeContext} from "react-native-material-ui";
 import React, {Component} from "react";
@@ -21,11 +21,20 @@ class FoodListScreen extends Component {
         }
     }
 
-    handleAddedFood = (foodlist) => {
-        this.setState({
-            sum: this.state.sum + foodlist.price,
-            newList: [...this.state.newList, foodlist]
-        })
+    handleAddedFood = (item) => {
+        let itemAlreadyInList = this.state.newList.find(value => value.id === item.id);
+        if (itemAlreadyInList === undefined) {
+            this.setState({
+                sum: this.state.sum + item.price,
+                newList: [...this.state.newList, item]
+            })
+        } else {
+           item.quantity =item.quantity+ 1;
+            this.setState({
+                sum: this.state.sum + item.price,})
+            console.log(item.quantity)
+        }
+
     };
 
     handleButtonAdd = (isclicked) => {

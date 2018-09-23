@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {Dimensions, FlatList, StyleSheet, Text, View} from 'react-native'
-import {Card, Divider, Icon, ListItem} from 'react-native-material-ui';
+import {Dimensions, FlatList, StyleSheet, Text, View, TouchableHighlight} from 'react-native'
+import {Card, Divider, ListItem, Toolbar} from 'react-native-material-ui';
 import styles from "../../styles/styles.js";
 import colors from "../../styles/colors.js";
 import categories from "../../databases/categories";
+import Icon from 'react-native-vector-icons/Ionicons';
 
 class FoodList extends Component {
 
@@ -12,7 +13,7 @@ class FoodList extends Component {
         super(props);
         this.state = {
             sumPrice: 0,
-            boughtList: [],
+            checked: false,
         };
     }
 
@@ -20,7 +21,7 @@ class FoodList extends Component {
         return (
             <Card>
                 <Text style={styles.itemText}>
-                    Lista zakupów
+                    Shopping list
                 </Text>
             </Card>)
     }
@@ -31,37 +32,9 @@ class FoodList extends Component {
             <Divider/>
             <Card>
                 <Text style={styles.itemText}>
-                    <Icon name="attach-money" style={{color: "white", paddingTop: 15,}}/>
-                    Suma : {this.props.sum.toFixed(2)}zł</Text>
+                    <Icon name="md-wallet" style={{color: "white", paddingTop: 15,}}/>
+                    Sum : {this.props.sum.toFixed(2)}zł</Text>
             </Card>
-
-                <FlatList
-                    style={{...StyleSheet.absoluteFillObject}}
-                    windowSize={21}
-                    data={this.state.boughtList}
-                    renderItem={({item}) => (
-
-                        <ListItem
-                            itemStyle={{
-                                flex: 1,
-                                flexDirection: "column",
-                                backgroundColor: colors.cardColor,
-                                fontFamily: "Ebrima",
-                                fontSize: 15
-                            }}
-                            divider
-                            centerElement={{
-                                primaryText: `${item.name} ${item.price.toFixed(2)}zł`,
-                            }}
-                            onPress={() => {
-
-                            }}>
-                        </ListItem>
-
-                    )}
-
-                    keyExtractor={item => item.id + "" + Math.floor((Math.random() * 5) + 100)}
-                />
 
         </View>)
 
@@ -94,22 +67,22 @@ class FoodList extends Component {
                                     flex: 1,
                                     flexDirection: "column",
                                     backgroundColor: colors.cardColor,
-                                    fontFamily: "Ebrima",
                                     fontSize: 15
                                 }}
                                 divider
                                 leftElement={categories.find(category => {
                                     return category.title === item.category;
                                 }).icon}
+                                rightElement={item.checked?"check-box":"check-box-outline-blank"}
                                 centerElement={{
-                                    primaryText: `${item.name} ${item.price.toFixed(2)}zł`,
+                                    primaryText: `${item.name} ${item.price.toFixed(2)}zł ${item.quantity}`,
                                 }}
-                                onPress={() => {
-                                    this.setState({
-                                        boughtList: [...this.state.boughtList, item]
-                                    })
-                                }}>
+                                onPress={()=>{
+                                    item.checked=!item.checked;
+                                    this.setState({checked:!this.state.checked})}
+                               }>
                             </ListItem>
+
 
                         )}
 

@@ -10,7 +10,7 @@ YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTIm
 
 
 const App = createBottomTabNavigator({
-        Home: CalendarScreen,
+        Calendar: CalendarScreen,
         ShoppingList: FoodListScreen,
         Recipes: Recipes,
     },
@@ -19,7 +19,7 @@ const App = createBottomTabNavigator({
             tabBarIcon: ({ focused, tintColor }) => {
                 const { routeName } = navigation.state;
                 let iconName;
-                if (routeName === 'Home') {
+                if (routeName === 'Calendar') {
                     iconName = `md-calendar`;
                 } else if (routeName === 'ShoppingList') {
                     iconName = `md-clipboard`;
