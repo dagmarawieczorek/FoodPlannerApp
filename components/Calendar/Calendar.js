@@ -1,19 +1,23 @@
 import React, {Component} from 'react';
-import {KeyboardAvoidingView, Text} from 'react-native';
+import {View, Button} from 'react-native';
+import {Calendar} from 'react-native-calendars';
 import colors from "../../styles/colors";
 
-
-class Calendar extends Component {
-
+class CalendarScreen extends Component {
 
     render() {
         return (
-            <KeyboardAvoidingView behavior="padding" style={{backgroundColor: colors.bgColor, flex: 1}}>
-                <Text>Kalendarx</Text>
-            </KeyboardAvoidingView>
-
+            <View behavior="padding" style={{backgroundColor: colors.bgColor, flex: 1}}>
+                <Calendar/>
+                <Button
+                    title="Go to food list"
+                    onPress={() =>
+                        this.props.navigation.navigate("ShoppingList")
+                    }
+                />
+            </View>
         );
     }
 }
 
-export default Calendar;
+export default CalendarScreen;

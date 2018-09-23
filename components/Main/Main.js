@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import FoodListScreen from "../FoodListScreen/FoodListScreen.js";
-import Calendar from "../Calendar/Calendar.js";
 import {
     createStackNavigator,
 } from 'react-navigation';
+import CalendarScreen from "../Calendar/Calendar";
 
 
 const App = createStackNavigator({
-    Home: { screen: FoodListScreen },
-    Calendar: {screen: Calendar},
+    Home: { screen:CalendarScreen},
+    ShoppingList: { screen: FoodListScreen },
 
 });
 
