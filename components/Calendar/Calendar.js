@@ -3,6 +3,7 @@ import {View, Button} from 'react-native';
 import {Calendar} from 'react-native-calendars';
 import colors from "../../styles/colors";
 
+
 class CalendarScreen extends Component {
 
     render() {

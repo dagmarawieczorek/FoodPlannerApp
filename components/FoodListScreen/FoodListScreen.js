@@ -1,7 +1,7 @@
 import {StyleSheet, View} from "react-native";
 import PopUpAdd from "../PopUpAdd/PopUpAdd";
 import SearchInput from "../SearchInput/SearchInput";
-import FoodList from "../FoodList/FoodList";
+import FoodList from "./FoodList";
 import {ActionButton, getTheme, ThemeContext} from "react-native-material-ui";
 import React, {Component} from "react";
 import colors from "../../styles/colors.js";
