@@ -1,15 +1,20 @@
 import React, {Component} from 'react';
 import FoodListScreen from "../FoodListScreen/FoodListScreen.js";
+import Calendar from "../Calendar/Calendar.js";
+import {
+    createStackNavigator,
+} from 'react-navigation';
 
 
-class Main extends Component {
+const App = createStackNavigator({
+    Home: { screen: FoodListScreen },
+    Calendar: {screen: Calendar},
 
+});
 
-    render() {
-        return (<FoodListScreen/>)
-    }
-
-
-};
-
+ class Main extends Component {
+     render() {
+         return (<App/>)
+     };
+ }
 export default Main;
