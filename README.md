@@ -1,6 +1,8 @@
 # FoodPlannerApp
 ## Project of mobile app in React Native using realm native.
 
+ Food Planner will be an app that allows you to plan your whole days and generate shopping lists, that you can edit. It will also show how much will you spend on every meal.
+ 
  Still lots to do, but it's a start!
  
 <img src="https://github.com/dagmarawieczorek/FoodPlannerApp/blob/master/images/gif-test-4.gif" 
