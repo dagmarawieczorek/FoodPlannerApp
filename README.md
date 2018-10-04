@@ -5,7 +5,7 @@
  
  Still lots to do, but it's a start!
  
- what I still need to do:
+ what I need to do asap:
 1. add Redux to handle the state
 2. recipes screen
 3. adding recipes to realm
