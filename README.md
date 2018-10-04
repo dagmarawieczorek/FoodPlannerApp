@@ -5,6 +5,12 @@
  
  Still lots to do, but it's a start!
  
+ what I still need to do:
+1. add Redux to handle the state
+2. recipes screen
+3. adding recipes to realm
+
+ 
 <img src="https://github.com/dagmarawieczorek/FoodPlannerApp/blob/master/images/gif-test-4.gif" 
 alt="sample of app" width="400" height="auto" border="10" />
 
